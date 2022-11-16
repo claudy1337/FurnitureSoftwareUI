@@ -23,6 +23,7 @@ namespace FurnitureSoftwareUI.Pages.UserControl
     public partial class MarketPage : Page
     {
         public static Client Client;
+
         public MarketPage(Client client)
         {
             Client = client;

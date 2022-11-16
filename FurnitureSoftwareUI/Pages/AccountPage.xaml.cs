@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FurnitureSoftwareUI.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FurnitureSoftwareUI.Data.Classes;
 
 namespace FurnitureSoftwareUI.Pages
 {
@@ -20,11 +22,19 @@ namespace FurnitureSoftwareUI.Pages
     /// </summary>
     public partial class AccountPage : Page
     {
-        public AccountPage()
+        public static Client Client;
+        public AccountPage(Client client)
         {
+            Client = client;
             InitializeComponent();
+            BindingData();
         }
-
+        private void BindingData()
+        {
+            this.DataContext = Client;
+            cbRole.ItemsSource = DBConnection.connect.Role.ToList();
+            cbRole.SelectedIndex = Client.idRole;
+        }
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (cbRole.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtName.Text) ||

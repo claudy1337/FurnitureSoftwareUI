@@ -36,7 +36,9 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                            <TextBlock x:Name="txtHome" Text="Home" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
                             <Button 
+                            x:Name="btnMarket"
                             Foreground="Black"
                             Width="200"
                             Height="40"
@@ -44,6 +46,7 @@
                             Content="Market" Cursor="Hand"/>
 
                             <Button
+                            x:Name="btnDiscount"
                             Foreground="Black"
                             Width="200"
                             Margin="0,15,0,0"
@@ -53,7 +56,10 @@
                             Cursor="Hand"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
-                            <Button 
+                            <TextBlock Visibility="Hidden" x:Name="txtAdmin" Text="Admin Panel" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
+                            <Button
+                            x:Name="btnClientControl"
+                            Visibility="Hidden"
                             Foreground="Black"
                             Width="200"
                             Height="40"
@@ -61,6 +67,8 @@
                             Content="Client Control" Cursor="Hand"/>
 
                             <Button
+                            x:Name="btnMoreInformation"
+                            Visibility="Hidden"
                             Foreground="Black"
                             Width="200"
                             Margin="0,15,0,0"
@@ -70,7 +78,10 @@
                             Cursor="Hand"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock x:Name="txtProvider" Visibility="Hidden" Text="Provider Panel" HorizontalAlignment="Center" FontSize="20" Margin="0,5,0,5"/>
                             <Button 
+                            x:Name="btnApp"
+                            Visibility="Hidden"
                             Foreground="Black"
                             Width="200"
                             Height="40"
@@ -78,6 +89,8 @@
                             Content="Applications" Cursor="Hand"/>
 
                             <Button
+                            x:Name="btnProductControl"
+                            Visibility="Hidden"
                             Foreground="Black"
                             Width="200"
                             Margin="0,15,0,0"

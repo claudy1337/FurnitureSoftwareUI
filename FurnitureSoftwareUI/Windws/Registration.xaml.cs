@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FurnitureSoftwareUI.Data.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,10 +54,19 @@ namespace FurnitureSoftwareUI.Windws
             }
             else
             {
-                MainWindow main = new MainWindow();
-                MessageBox.Show("Welcome: ");
-                main.Show();
-                this.Close();
+                if (DBMethodsFromUser.isСorrectUserData(txtLogin.Text, txtPassword.Password) == false)
+                {
+                    DBMethodsFromUser.AddAuthorization(txtLogin.Text, txtPassword.Password);
+                    DBMethodsFromUser.AddClient(txtName.Text);
+                    MainWindow main = new MainWindow(DBMethodsFromUser.CurrentClient);
+                    MessageBox.Show($"Welcome: {DBMethodsFromUser.CurrentClient.Name}");
+                    main.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("данные уже есть!");
+                }
             }
         }
     }

@@ -25,9 +25,27 @@ namespace FurnitureSoftwareUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public static Client CurrentClient;
+        public MainWindow(Client currentClient)
         {
+            CurrentClient = currentClient;
             InitializeComponent();
+            FrameContainer.Navigate(new AccountPage(CurrentClient));
+            if (DBMethodsFromUser.GetAdminRole(CurrentClient.Authorization.Login) == true)
+            {
+                btnClientControl.Visibility = Visibility.Visible;
+                btnMoreInformation.Visibility = Visibility.Visible;
+                txtAdmin.Visibility = Visibility.Visible;
+            }
+            else if (DBMethodsFromUser.GetProviderRole(CurrentClient.Authorization.Login) == true)
+            {
+                btnProductControl.Visibility = Visibility.Visible;
+                btnApp.Visibility = Visibility.Visible;
+                txtProvider.Visibility = Visibility.Visible;
+                btnMarket.Visibility = Visibility.Hidden;
+                txtHome.Visibility = Visibility.Hidden;
+                btnDiscount.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -61,7 +79,7 @@ namespace FurnitureSoftwareUI
 
         private void btnAccount_Click(object sender, RoutedEventArgs e)
         {
-            FrameContainer.Navigate(new AccountPage());
+            FrameContainer.Navigate(new AccountPage(CurrentClient));
         }
     }
 }

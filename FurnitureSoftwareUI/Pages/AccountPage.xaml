@@ -28,20 +28,20 @@
                      IsReadOnly="True"
                      Text="{Binding Authorization.Login}"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     material:HintAssist.Hint="Login" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Login" Width="220" Height="52"/>
                 <TextBox
                      x:Name="txtPassword"
                      Margin="0,25,0,25"
                      FontSize="13"
                      Text="{Binding Authorization.Password}"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     material:HintAssist.Hint="Password" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Password" Width="220" Height="52"/>
                 <TextBox
                      x:Name="txtName"
                      FontSize="13"
                      Text="{Binding Name}"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     material:HintAssist.Hint="Name" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Name" Width="220" Height="52"/>
 
                 <TextBox
                      x:Name="txtLastName"
@@ -49,11 +49,12 @@
                      Margin="0,25,0,25"
                      Text="{Binding Surname}"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     material:HintAssist.Hint="Surname" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Surname" Width="220" Height="52"/>
 
                 <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
                       x:Name="cbRole"
-                      material:HintAssist.Hint="Role" Width="220" Height="45"
+                      IsReadOnly="True"
+                      material:HintAssist.Hint="Role" Width="220" Height="52"
                       DisplayMemberPath="Type"/>
                 <Button     Margin="0,25,0,0"
                         Foreground="Black"

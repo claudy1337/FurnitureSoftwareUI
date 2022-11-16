@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FurnitureSoftwareUI.Data.Model;
+using FurnitureSoftwareUI.Data.Classes;
 
 namespace FurnitureSoftwareUI.Windws
 {
@@ -19,6 +21,7 @@ namespace FurnitureSoftwareUI.Windws
     /// </summary>
     public partial class Auth : Window
     {
+        public static Client Client;
         public Auth()
         {
             InitializeComponent();
@@ -39,14 +42,32 @@ namespace FurnitureSoftwareUI.Windws
 
         private void btnAuth_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtPassword.Password))
+            try
             {
-                MessageBox.Show("данные не полные");
-                return;
+                if (string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtPassword.Password))
+                {
+                    MessageBox.Show("данные не полные");
+                    return;
+                }
+                else
+                {
+                    if (DBMethodsFromUser.isСorrectUserData(txtLogin.Text, txtPassword.Password) == true)
+                    {
+                        Client = DBMethodsFromUser.GetClient(txtLogin.Text, txtPassword.Password);
+                        MainWindow main = new MainWindow(Client);
+                        MessageBox.Show($"Welcome: {Client.Name}");
+                        main.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("аккаунт не существует");
+                    }
+                }
             }
-            else
+            catch(FormatException)
             {
-
+                return;
             }
         }
 

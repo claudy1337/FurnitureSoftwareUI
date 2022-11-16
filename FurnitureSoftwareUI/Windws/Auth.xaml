@@ -25,16 +25,18 @@
                        FontSize="25"/>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBox
+                     VerticalContentAlignment="Center"
                      x:Name="txtLogin"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     material:HintAssist.Hint="Login" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Login" Width="220" Height="52"/>
                 <PasswordBox
+                    VerticalContentAlignment="Center"
                      x:Name="txtPassword"
                      Margin="0,25,0,0"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledPasswordBox}"
-                     material:HintAssist.Hint="Password" Width="220" Height="45"/>
+                     material:HintAssist.Hint="Password" Width="220" Height="52"/>
             </StackPanel>
             <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button

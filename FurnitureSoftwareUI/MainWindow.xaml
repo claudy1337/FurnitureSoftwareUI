@@ -39,6 +39,7 @@
                             <TextBlock x:Name="txtHome" Text="Home" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
                             <Button 
                             x:Name="btnMarket"
+                            Click="btnMarket_Click"
                             Foreground="Black"
                             Width="200"
                             Height="40"

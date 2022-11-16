@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FurnitureSoftwareUI.Data.Classes;
+using System.Text.RegularExpressions;
 
 namespace FurnitureSoftwareUI.Pages
 {
@@ -27,6 +28,10 @@ namespace FurnitureSoftwareUI.Pages
         {
             Client = client;
             InitializeComponent();
+            if (DBMethodsFromUser.GetProviderRole(Client.Authorization.Login) == true)
+            {
+                txtBalance.Visibility = Visibility.Hidden;
+            }
             BindingData();
         }
         private void BindingData()
@@ -37,11 +42,34 @@ namespace FurnitureSoftwareUI.Pages
         }
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (cbRole.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtName.Text) ||
-                string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            try
             {
-
+                if (cbRole.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtName.Text) ||
+                string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+                {
+                    MessageBox.Show("заполните все поля");
+                    return;
+                }
+                else
+                {
+                    DBMethodsFromUser.EditClient(Client, txtPassword.Text, txtName.Text, txtLastName.Text, Convert.ToInt32(txtBalance.Text));
+                }
             }
+            catch(FormatException)
+            {
+                return;
+            }
+        }
+
+        private void imgAccount_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DBMethodsFromUser.EditImageClient(Client);
+            NavigationService.Navigate(new AccountPage(Client));
+        }
+
+        private void txtBalance_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[0-9]");
         }
     }
 }

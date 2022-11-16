@@ -16,7 +16,9 @@ using FurnitureSoftwareUI.Pages;
 using FurnitureSoftwareUI.Windws;
 using FurnitureSoftwareUI.Data.Classes;
 using FurnitureSoftwareUI.Data.Model;
-
+using FurnitureSoftwareUI.Pages.AdminControl;
+using FurnitureSoftwareUI.Pages.UserControl;
+using FurnitureSoftwareUI.Pages.Provider;
 
 namespace FurnitureSoftwareUI
 {
@@ -80,6 +82,11 @@ namespace FurnitureSoftwareUI
         private void btnAccount_Click(object sender, RoutedEventArgs e)
         {
             FrameContainer.Navigate(new AccountPage(CurrentClient));
+        }
+
+        private void btnMarket_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new MarketPage(CurrentClient));
         }
     }
 }

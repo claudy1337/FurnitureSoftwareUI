@@ -21,6 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Image x:Name="imgAccount" MouseLeftButtonDown="imgAccount_MouseLeftButtonDown" Grid.Row="0" Grid.Column="1" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Image}" Margin="10"/>
             <StackPanel Grid.RowSpan="10" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBox
                      x:Name="txtLogin"
@@ -56,6 +57,15 @@
                       IsReadOnly="True"
                       material:HintAssist.Hint="Role" Width="220" Height="52"
                       DisplayMemberPath="Type"/>
+                <TextBox
+                     MaxLength="5"
+                     PreviewTextInput="txtBalance_PreviewTextInput"
+                     x:Name="txtBalance"
+                     FontSize="13"
+                     Margin="0,25,0,25"
+                     Text="{Binding Balance}"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     material:HintAssist.Hint="Balance" Width="220" Height="52"/>
                 <Button     Margin="0,25,0,0"
                         Foreground="Black"
                         Width="220"
@@ -69,7 +79,7 @@
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <TextBlock Text="Statistics" HorizontalAlignment="Center" FontSize="25" Margin="0,5,0,10"/>
             </StackPanel>
-            <Image x:Name="imgAccount" Grid.Row="0" Grid.Column="1" Source="/Resources/account.png/" Margin="10"/>
+           
         </Grid>
     </material:Card>
 </Page>

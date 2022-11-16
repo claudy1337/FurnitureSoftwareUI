@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FurnitureSoftwareUI.Data.Model;
+using FurnitureSoftwareUI.Data.Classes;
 
 namespace FurnitureSoftwareUI.Pages.UserControl
 {
@@ -20,9 +22,16 @@ namespace FurnitureSoftwareUI.Pages.UserControl
     /// </summary>
     public partial class MarketPage : Page
     {
-        public MarketPage()
+        public static Client Client;
+        public MarketPage(Client client)
         {
+            Client = client;
             InitializeComponent();
+            BindingData();
+        }
+        private void BindingData()
+        {
+            lstvProduct.ItemsSource = DBConnection.connect.Product.Where(p => p.isActual == true).ToList();
         }
     }
 }

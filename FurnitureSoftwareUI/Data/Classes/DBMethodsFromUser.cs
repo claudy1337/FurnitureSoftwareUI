@@ -9,6 +9,8 @@ using FurnitureSoftwareUI.Data.Classes;
 using System.Windows;
 using Microsoft.Win32;
 using System.IO;
+using FurnitureSoftwareUI.Properties;
+using System.Security.Principal;
 
 namespace FurnitureSoftwareUI.Data.Classes
 {
@@ -40,7 +42,7 @@ namespace FurnitureSoftwareUI.Data.Classes
                 {
                     getClient.Name = name;
                     getClient.Surname = surname;
-                    getClient.Balance += balance;
+                    getClient.Balance = balance;
                     getClient.Authorization.Password = password;
                     DBConnection.connect.SaveChanges();
                     MessageBox.Show("данные поменялись");
@@ -116,6 +118,7 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             try
             {
+                byte[] image = File.ReadAllBytes("account.png");
                 if (CurrentAuthorization != null)
                 {
                     Client client = new Client
@@ -123,7 +126,8 @@ namespace FurnitureSoftwareUI.Data.Classes
                         idAuth = CurrentAuthorization.id,
                         Name = name,
                         idRole = role,
-                        Balance = 0
+                        Balance = 0,
+                        Image = image
                     };
                     CurrentClient = client;
                     DBConnection.connect.Client.Add(client);

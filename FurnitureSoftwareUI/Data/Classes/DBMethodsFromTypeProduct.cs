@@ -10,19 +10,15 @@ using FurnitureSoftwareUI.Data.Model;
 
 namespace FurnitureSoftwareUI.Data.Classes
 {
-    internal class DBMethodsFromProduct
+    internal class DBMethodsFromTypeProduct
     {
-        public static ObservableCollection<Product> GetProducts()
-        {
-            return new ObservableCollection<Product>(DBConnection.connect.Product);
-        }
         public static ObservableCollection<ProductType> GetProductTypes()
         {
             return new ObservableCollection<ProductType>(DBConnection.connect.ProductType);
         }
         public static ProductType GetProductType(string type)
         {
-            return GetProductTypes().FirstOrDefault(t=>t.Type == type);
+            return GetProductTypes().FirstOrDefault(t => t.Type == type);
         }
         public static void AddProductType(string type, byte[] image)
         {
@@ -44,6 +40,5 @@ namespace FurnitureSoftwareUI.Data.Classes
                 return;
             }
         }
-
     }
 }

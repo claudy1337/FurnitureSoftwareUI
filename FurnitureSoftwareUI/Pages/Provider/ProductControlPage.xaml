@@ -22,11 +22,18 @@
                       SelectionChanged="cbTypeProduct_SelectionChanged"
                       DisplayMemberPath="Type"
                       material:HintAssist.Hint="Type" Width="210" Height="52"/>
-            <TextBlock x:Name="txtAddType" MouseLeftButtonDown="txtAddType_MouseLeftButtonDown" Text="Add Type" FontSize="13" Margin="0,5,5,0" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="txtAddType" MouseLeftButtonDown="txtAddType_MouseLeftButtonDown" Text="Add Type" FontSize="13" Margin="0,5,5,15" HorizontalAlignment="Right"/>
+
+            <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      x:Name="cbConfigurator"
+                      SelectionChanged="cbConfigurator_SelectionChanged"
+                      DisplayMemberPath="Name"
+                      material:HintAssist.Hint="Configurate" Width="210" Height="52"/>
+            <TextBlock Text="Add Configurate" x:Name="txtAddConfigurate" MouseLeftButtonDown="txtAddConfigurate_MouseLeftButtonDown" Margin="0,5,5,15" FontSize="13" HorizontalAlignment="Right"/>
 
             <TextBox x:Name="txtName"
                      TextChanged="txtName_TextChanged"
-                     Margin="0,15,0,15"
+                     Margin="0,0,0,15"
                      VerticalContentAlignment="Center"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -50,7 +57,7 @@
                     Click="btnAdd_Click" Cursor="Hand"/>
             <TextBlock x:Name="txtClear" MouseLeftButtonDown="txtClear_MouseLeftButtonDown"  Text="Clear" FontSize="13" HorizontalAlignment="Right" Margin="0,5,5,0"/>
         </StackPanel>
-        <ListView Grid.Column="1" x:Name="lstvProduct" Grid.Row="1" Width="480" Height="630" HorizontalContentAlignment="Center">
+        <ListView Grid.Column="1" x:Name="lstvProduct" SelectionChanged="lstvProduct_SelectionChanged" Grid.Row="1" Width="480" Height="630" HorizontalContentAlignment="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <material:Card HorizontalAlignment="Center" Width="325" Height="300">
@@ -67,10 +74,13 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10">
-                                        <TextBlock Text="{Binding Name}" FontSize="15" TextWrapping="Wrap"/>
-                                        <TextBlock Text="{Binding ProductType.Type}" FontSize="15" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Name,StringFormat=Name: {0}}" FontSize="15" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding ProductType.Type, StringFormat=Type: {0}}" FontSize="15" TextWrapping="Wrap"/>
                                     </StackPanel>
-                                    <TextBlock Text="{Binding Descrition}" Grid.Column="1" FontSize="15" Margin="10" TextWrapping="Wrap"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10">
+                                        <TextBlock Text="{Binding Count, StringFormat=Count: {0}}" FontSize="15" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Configurator.Price, StringFormat=Price: {0}}" FontSize="15" TextWrapping="Wrap"/>
+                                    </StackPanel>
                                 </Grid>
                             </StackPanel>
                         </Grid>

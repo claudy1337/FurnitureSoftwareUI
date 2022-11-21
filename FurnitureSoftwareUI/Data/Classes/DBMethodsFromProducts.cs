@@ -18,6 +18,10 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             return new ObservableCollection<Product>(DBConnection.connect.Product);
         }
+        public static ObservableCollection<ProductsImage> GetProductsImages()
+        {
+            return new ObservableCollection<ProductsImage>(DBConnection.connect.ProductsImage);
+        }
         public static Product GetProduct(string name)
         {
             return GetProducts().FirstOrDefault(p => p.Name == name);
@@ -30,15 +34,10 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             return GetProducts().Where(p => p.Name == name && p.isActual == true && p.Count == 0).ToList();
         }
-        public static IEnumerable<Product> GetProducts(int price)
+        public static ProductsImage GetProductsImage(string code)
         {
-            return GetProducts().Where(p => p.Price == price && p.isActual == true && p.Count == 0).ToList();
+            return GetProductsImages().FirstOrDefault(i=>i.Code == code);
         }
-        public static IEnumerable<Product> GetProducts(int price, int idType)
-        {
-            return GetProducts().Where(p => p.Price == price && p.isActual == true && p.Count == 0 && p.idType == idType).ToList();
-        }
-
         public static void AddImageProduct(byte[] image1, byte[] image2, byte[] image3)
         {
             ProductsImage prodct = new ProductsImage
@@ -52,7 +51,7 @@ namespace FurnitureSoftwareUI.Data.Classes
             ProdctImages = prodct;
 
         }
-        public static void AddProduct(string name, string description, int idType, int count, bool isActual, int price)
+        public static void AddProduct(string name, string description, int idType, int count, bool isActual, int price, int idConfigurator, int idImage)
         {
             try
             {
@@ -62,10 +61,10 @@ namespace FurnitureSoftwareUI.Data.Classes
                     Product product = new Product
                     {
                         Name = name,
+                        idConfigurator = idConfigurator,
                         Descrition = description,
                         idType = idType,
                         Count = count,
-                        Price = price,
                         isActual = true,
                         idImage = ProdctImages.id
                     };
@@ -77,7 +76,6 @@ namespace FurnitureSoftwareUI.Data.Classes
                 else
                 {
                     getProduct.Count += count;
-                    getProduct.Price = price;
                     getProduct.Descrition = description;
                     getProduct.isActual = isActual;
                     DBConnection.connect.SaveChanges();
@@ -95,26 +93,5 @@ namespace FurnitureSoftwareUI.Data.Classes
             ObservableCollection<ProductType> productTypes = new ObservableCollection<ProductType>(DBConnection.connect.ProductType);
             return productTypes.FirstOrDefault(t=>t.Type == type);
         }
-        public static void AddTypeProduct(string type, byte[] image)
-        {
-            var getType = GetProductTypes(type);
-            if (getType == null)
-            {
-                ProductType productType = new ProductType
-                {
-                    Type = type,
-                    Image = image
-                };
-                DBConnection.connect.ProductType.Add(productType);
-                DBConnection.connect.SaveChanges();
-                MessageBox.Show("добавлен");
-            }
-            else
-            {
-                MessageBox.Show("такой тип мебели уже есть");
-                return;
-            }
-        }
-
     }
 }

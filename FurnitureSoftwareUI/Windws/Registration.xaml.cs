@@ -49,7 +49,7 @@ namespace FurnitureSoftwareUI.Windws
         {
             if (string.IsNullOrWhiteSpace(txtPassword.Password) || string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("данные не полные");
+                MessageBox.Show("data is not complete");
                 return;
             }
             else

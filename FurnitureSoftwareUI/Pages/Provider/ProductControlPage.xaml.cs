@@ -37,7 +37,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Provider.AddProductPage());
+            NavigationService.Navigate(new Provider.AddProductPage(null, Client));
         }
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
@@ -77,6 +77,20 @@ namespace FurnitureSoftwareUI.Pages.Provider
             NavigationService.Navigate(new Provider.AddTypeProductPage());
         }
 
-        
+        private void cbConfigurator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtAddConfigurate_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void lstvProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectProduct = lstvProduct.SelectedItem as Product;
+            NavigationService.Navigate(new AddProductPage(selectProduct, Client));
+        }
     }
 }

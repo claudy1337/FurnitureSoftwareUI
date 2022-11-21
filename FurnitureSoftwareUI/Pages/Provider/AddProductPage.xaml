@@ -23,9 +23,9 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <Image Grid.Column="1" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <Image Grid.Column="2" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Image x:Name="imgFurniture1" MouseLeftButtonDown="imgFurniture1_MouseLeftButtonDown" Source="{Binding ProductsImage.Image1}" Grid.Column="0" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Image x:Name="imgFurniture2" MouseLeftButtonDown="imgFurniture2_MouseLeftButtonDown" Source="{Binding ProductsImage.Image2}" Grid.Column="1" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Image x:Name="imgFurniture3" MouseLeftButtonDown="imgFurniture3_MouseLeftButtonDown" Source="{Binding ProductsImage.Image3}" Grid.Column="2" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1">
@@ -35,8 +35,60 @@
                     <ColumnDefinition Width="250"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock x:Name="txtAddOrEdit" Text="Product Add" HorizontalAlignment="Center" FontSize="25"/>
-                    
+                    <Grid Height="380">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" x:Name="txtAddOrEdit" Text="Product Add" HorizontalAlignment="Center" FontSize="25"/>
+                        <StackPanel Grid.Row="1">
+                            <Grid Height="330">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="222"/>
+                                    <ColumnDefinition Width="222"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBox
+                                 x:Name="txtName"
+                                 FontSize="13"
+                                 Text="{Binding Name}"
+                                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                                 material:HintAssist.Hint="Name" Width="200" Height="52"/>
+                                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                                 x:Name="cbType"
+                                 SelectionChanged="cbType_SelectionChanged"
+                                 material:HintAssist.Hint="Type" Width="200" Height="52"
+                                 DisplayMemberPath="Type"
+                                 Margin="0,15,0,15"/>
+                                    <TextBox
+                                 PreviewTextInput="txtCount_PreviewTextInput"
+                                 x:Name="txtCount"
+                                 FontSize="13"
+                                 Text="{Binding Count}"
+                                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                                 material:HintAssist.Hint="Count" Width="200" Height="52"/>
+                                   
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                                 x:Name="cbConfigurate"
+                                 material:HintAssist.Hint="Configurate" Width="200" Height="52"
+                                 DisplayMemberPath="Name"/>
+                                    <TextBox
+                                 MaxLength="40"
+                                 Margin="0,15,0,0"      
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 x:Name="txtDescrition"
+                                 FontSize="13"
+                                 Text="{Binding Descrition}"
+                                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                                 material:HintAssist.Hint="Descrition" Width="200" Height="82"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <Grid Height="380">
@@ -44,6 +96,18 @@
                             <RowDefinition Height="250"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+                        <Image x:Name="imgType" Source="{Binding ProductType.Type}" Grid.Row="0" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock x:Name="txtPrice" FontSize="20" Margin="0,0,0,5"/>
+                            <Button
+                    Foreground="Black"
+                    Width="210"
+                    Height="40"
+                    Background="Transparent"
+                    Content="Add" 
+                    x:Name="btnAdd"
+                    Click="btnAdd_Click" Cursor="Hand"/>
+                        </StackPanel>
                     </Grid>
                 </StackPanel>
             </Grid>

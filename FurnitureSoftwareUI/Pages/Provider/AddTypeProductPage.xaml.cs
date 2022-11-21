@@ -39,7 +39,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
             }
             else
             {
-                DBMethodsFromProduct.AddProductType(txtName.Text, image);
+                DBMethodsFromTypeProduct.AddProductType(txtName.Text, image);
                 NavigationService.Navigate(new AddTypeProductPage());
             }
             

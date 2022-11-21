@@ -24,6 +24,7 @@ namespace FurnitureSoftwareUI.Data.Model
         public int idOuter { get; set; }
         public int idInner { get; set; }
         public Nullable<int> Price { get; set; }
+        public string Name { get; set; }
     
         public virtual InnerMaterial InnerMaterial { get; set; }
         public virtual OuterMaterial OuterMaterial { get; set; }

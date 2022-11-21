@@ -93,5 +93,10 @@ namespace FurnitureSoftwareUI
         {
             FrameContainer.Navigate(new ProductControlPage(CurrentClient));
         }
+
+        private void btnApp_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new ApplicationPage());
+        }
     }
 }

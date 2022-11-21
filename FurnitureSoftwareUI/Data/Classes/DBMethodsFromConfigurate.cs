@@ -52,8 +52,8 @@ namespace FurnitureSoftwareUI.Data.Classes
         public static int PriceConfigurate(OuterMaterial outer, InnerMaterial inner)
         {
             int price = outer.Price + inner.Price;
-            price += (price * 10 ) / 100;
-            return price;
+            int procent = (price * 10 ) / 100;
+            return price + procent;
         }
     }
 }

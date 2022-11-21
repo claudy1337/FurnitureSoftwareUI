@@ -84,7 +84,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
 
         private void txtAddConfigurate_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            NavigationService.Navigate(new ApplicationPage());
         }
 
         private void lstvProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)

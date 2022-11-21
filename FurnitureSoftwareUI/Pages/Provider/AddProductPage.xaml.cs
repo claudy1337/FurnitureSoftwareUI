@@ -53,6 +53,8 @@ namespace FurnitureSoftwareUI.Pages.Provider
             txtAddOrEdit.Text = "Product Edit";
             cbType.SelectedItem = Product.ProductType.Type;
             btnAdd.Content = "Edit";
+            txtName.IsReadOnly = true;
+            txtCode.IsReadOnly = true;
             txtPrice.Text = $"{Product.Configurator.Price}";
             cbConfigurate.SelectedIndex = Product.Configurator.id;
             cbType.SelectedIndex = Product.ProductType.id;
@@ -64,8 +66,6 @@ namespace FurnitureSoftwareUI.Pages.Provider
             imgFurniture2.Source = new BitmapImage(new Uri("/Resources/furniture.png",UriKind.RelativeOrAbsolute));
             imgFurniture3.Source = new BitmapImage(new Uri("/Resources/furniture.png",UriKind.RelativeOrAbsolute));
             imgType.Source = new BitmapImage(new Uri("/Resources/type.png", UriKind.RelativeOrAbsolute));
-            txtName.IsReadOnly = true;
-            txtCode.IsReadOnly = true;
             txtAddOrEdit.Text = "Product Add";
             btnAdd.Content = "Add";
         }
@@ -78,7 +78,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
         {
             var selectedType = cbType.SelectedItem as ProductType;
             var selectedConfigurate = cbConfigurate.SelectedItem as Configurator;
-            DBMethodsFromProducts.AddImageProduct(image1, image2, image3, txtCode.Text); //image edit
+            DBMethodsFromProducts.AddImageProduct(image1, image2, image3, txtCode.Text);
             var getImage = DBMethodsFromProducts.GetProductsImage(txtCode.Text);
             if (Product == null)
             {

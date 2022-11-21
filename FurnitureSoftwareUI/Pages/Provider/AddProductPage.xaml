@@ -112,7 +112,7 @@
                         </StackPanel>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Price :" FontSize="20"/>
+                                <TextBlock Text="Price: " FontSize="20"/>
                                 <TextBlock x:Name="txtPrice" FontSize="20" Margin="0,0,0,5"/>
                             </StackPanel>
                             <Button

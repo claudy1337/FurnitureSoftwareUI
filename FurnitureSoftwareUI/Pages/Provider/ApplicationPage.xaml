@@ -12,6 +12,78 @@
       Title="ApplicationPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="1" HorizontalContentAlignment="Center" Margin="10" x:Name="lstvConfigurate">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <material:Card Width="250" Height="200">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Name}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+                            <TextBlock Text="{Binding Price, StringFormat=Price: {0}}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+                            <StackPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="Inner Material" HorizontalAlignment="Center" FontSize="15"/>
+                                        <TextBlock Text="{Binding OuterMaterial.Name}" TextWrapping="Wrap" Margin="0,15,0,5" FontSize="12"/>
+                                        <TextBlock Text="{Binding OuterMaterial.Price, StringFormat=Price: {0}}" TextWrapping="Wrap" FontSize="12"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="Outer Material" HorizontalAlignment="Center" FontSize="15"/>
+                                        <TextBlock Text="{Binding InnerMaterial.Name}" TextWrapping="Wrap" Margin="0,15,0,5"  FontSize="12"/>
+                                        <TextBlock Text="{Binding InnerMaterial.Price, StringFormat=Price: {0}}" TextWrapping="Wrap" FontSize="12"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </material:Card>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Text="Configurator" FontSize="25" Margin="0,35,0,0" HorizontalAlignment="Center" Grid.Column="0"/>
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox x:Name="txtName"
+                     TextChanged="txtName_TextChanged"
+                     Margin="0,0,0,15"
+                     VerticalContentAlignment="Center"
+                     FontSize="13"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     material:HintAssist.Hint="Name" Width="210" Height="52"/>
+            <TextBlock x:Name="txtInner" FontSize="15"/>
+            <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      x:Name="cbInner"
+                      SelectionChanged="cbInner_SelectionChanged"
+                      DisplayMemberPath="Name"
+                      material:HintAssist.Hint="Inner" Width="210" Height="52"/>
+
+            <TextBlock x:Name="txtOuter" FontSize="15" Margin="0,15,0,0"/>
+            <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      x:Name="cbOuter"
+                      SelectionChanged="cbOuter_SelectionChanged"
+                      DisplayMemberPath="Name"
+                      material:HintAssist.Hint="Outer" Width="210" Height="52"
+                      Margin="0,0,0,25"/>
+
+            <Button
+                    Foreground="Black"
+                    Width="210"
+                    Height="40"
+                    Background="Transparent"
+                    Content="Add" 
+                    x:Name="btnAdd"
+                    Click="btnAdd_Click" Cursor="Hand"/>
+            <TextBlock x:Name="txtAddMaterial" MouseLeftButtonDown="txtAddMaterial_MouseLeftButtonDown" Text="Add Material" Margin="0,5,0,0"  FontSize="15" HorizontalAlignment="Right"/>
+        </StackPanel>
     </Grid>
 </Page>

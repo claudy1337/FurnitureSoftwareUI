@@ -82,6 +82,7 @@
                             <TextBlock x:Name="txtProvider" Visibility="Hidden" Text="Provider Panel" HorizontalAlignment="Center" FontSize="20" Margin="0,5,0,5"/>
                             <Button 
                             x:Name="btnApp"
+                            Click="btnApp_Click"
                             Visibility="Hidden"
                             Foreground="Black"
                             Width="200"

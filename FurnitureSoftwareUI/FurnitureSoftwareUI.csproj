@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\Classes\DBConnection.cs" />
     <Compile Include="Data\Classes\DBMethodsFromConfigurate.cs" />
+    <Compile Include="Data\Classes\DBMethodsFromMaterial.cs" />
     <Compile Include="Data\Classes\DBMethodsFromTypeProduct.cs" />
     <Compile Include="Data\Classes\DBMethodsFromProducts.cs" />
     <Compile Include="Data\Classes\DBMethodsFromUser.cs" />
@@ -146,6 +147,9 @@
     <Compile Include="Pages\AdminControl\OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Provider\AddMaterialPage.xaml.cs">
+      <DependentUpon>AddMaterialPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Provider\AddProductPage.xaml.cs">
       <DependentUpon>AddProductPage.xaml</DependentUpon>
     </Compile>
@@ -198,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdminControl\OrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Provider\AddMaterialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

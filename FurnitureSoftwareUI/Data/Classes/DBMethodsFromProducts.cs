@@ -38,24 +38,47 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             return GetProductsImages().FirstOrDefault(i=>i.Code == code);
         }
-        public static void AddImageProduct(byte[] image1, byte[] image2, byte[] image3)
+        public static void AddImageProduct(byte[] image1, byte[] image2, byte[] image3, string code)
         {
-            ProductsImage prodct = new ProductsImage
+            var getProductImage = GetProductsImage(code);
+            if (getProductImage == null)
             {
-                Image1 = image1,
-                Image2 = image2,
-                Image3 = image3
-            };
-            DBConnection.connect.ProductsImage.Add(prodct);
+                ProductsImage prodct = new ProductsImage
+                {
+                    Image1 = image1,
+                    Image2 = image2,
+                    Image3 = image3,
+                    Code = code
+                };
+                DBConnection.connect.ProductsImage.Add(prodct);  
+            }
+            else
+            {
+                getProductImage.Image1 = image1;
+                getProductImage.Image2 = image2;
+                getProductImage.Image3 = image3;
+            }
             DBConnection.connect.SaveChanges();
-            ProdctImages = prodct;
+        }
+        public static void EditProduct(Product product, int count, bool isActual, string description)
+        {
+            var getProduct = GetProduct(product.Name);
+            if (getProduct != null)
+            {
+                getProduct.Count = count;
+                getProduct.Descrition = description;
+                getProduct.isActual = isActual;
+                DBConnection.connect.SaveChanges();
+                MessageBox.Show("edit save");
+            }
 
         }
-        public static void AddProduct(string name, string description, int idType, int count, bool isActual, int price, int idConfigurator, int idImage)
+        public static void AddProduct(string code, string name, string description, int idType, int count, bool isActual, int price, int idConfigurator)
         {
             try
             {
                 var getProduct = GetProduct(name);
+                var getImage = GetProductsImage(code);
                 if (getProduct == null)
                 {
                     Product product = new Product
@@ -65,8 +88,8 @@ namespace FurnitureSoftwareUI.Data.Classes
                         Descrition = description,
                         idType = idType,
                         Count = count,
-                        isActual = true,
-                        idImage = ProdctImages.id
+                        isActual = isActual,
+                        idImage = getImage.id
                     };
                     DBConnection.connect.Product.Add(product);
                     DBConnection.connect.SaveChanges();
@@ -88,6 +111,8 @@ namespace FurnitureSoftwareUI.Data.Classes
                 return;
             }
         }
+
+        
         public static ProductType GetProductTypes(string type)
         {
             ObservableCollection<ProductType> productTypes = new ObservableCollection<ProductType>(DBConnection.connect.ProductType);

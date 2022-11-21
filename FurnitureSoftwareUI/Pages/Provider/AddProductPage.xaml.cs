@@ -43,11 +43,20 @@ namespace FurnitureSoftwareUI.Pages.Provider
             }
             else
             {
-                this.DataContext = Product;
-                txtAddOrEdit.Text = "Product Edit";
-                cbType.SelectedItem = Product.ProductType.Type;
+                BindingNotNullDataFurniture();
             }
             BindingData();
+        }
+        private void BindingNotNullDataFurniture()
+        {
+            this.DataContext = Product;
+            txtAddOrEdit.Text = "Product Edit";
+            cbType.SelectedItem = Product.ProductType.Type;
+            btnAdd.Content = "Edit";
+            txtPrice.Text = $"{Product.Configurator.Price}";
+            cbConfigurate.SelectedIndex = Product.Configurator.id;
+            cbType.SelectedIndex = Product.ProductType.id;
+            cbIsActive.IsChecked = Product.isActual;
         }
         private void BindingNullDataFurniture()
         {
@@ -55,7 +64,10 @@ namespace FurnitureSoftwareUI.Pages.Provider
             imgFurniture2.Source = new BitmapImage(new Uri("/Resources/furniture.png",UriKind.RelativeOrAbsolute));
             imgFurniture3.Source = new BitmapImage(new Uri("/Resources/furniture.png",UriKind.RelativeOrAbsolute));
             imgType.Source = new BitmapImage(new Uri("/Resources/type.png", UriKind.RelativeOrAbsolute));
+            txtName.IsReadOnly = true;
+            txtCode.IsReadOnly = true;
             txtAddOrEdit.Text = "Product Add";
+            btnAdd.Content = "Add";
         }
         private void BindingData()
         {
@@ -66,7 +78,8 @@ namespace FurnitureSoftwareUI.Pages.Provider
         {
             var selectedType = cbType.SelectedItem as ProductType;
             var selectedConfigurate = cbConfigurate.SelectedItem as Configurator;
-            DBMethodsFromProducts.AddImageProduct(image1, image2, image3);
+            DBMethodsFromProducts.AddImageProduct(image1, image2, image3, txtCode.Text); //image edit
+            var getImage = DBMethodsFromProducts.GetProductsImage(txtCode.Text);
             if (Product == null)
             {
                 if (string.IsNullOrWhiteSpace(txtCount.Text) || string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtPrice.Text))
@@ -76,13 +89,14 @@ namespace FurnitureSoftwareUI.Pages.Provider
                 }
                 else
                 {
-                    DBMethodsFromProducts.AddProduct(txtName.Text, txtDescrition.Text, selectedType.id, Convert.ToInt32(txtCount.Text), true, 34000, selectedConfigurate.id, DBMethodsFromProducts.ProdctImages.id);
+
+                    DBMethodsFromProducts.AddProduct(txtCode.Text, txtName.Text, txtDescrition.Text, selectedType.id, Convert.ToInt32(txtCount.Text), Convert.ToBoolean(cbIsActive.IsChecked), Convert.ToInt32(selectedConfigurate.Price), selectedConfigurate.id);
                     NavigationService.Navigate(new ProductControlPage(Client));
                 }
             }
             else
             {
-
+                DBMethodsFromProducts.EditProduct(Product, Convert.ToInt32(txtCount.Text), Convert.ToBoolean(cbIsActive.IsChecked), txtDescrition.Text);
             }
         }
         private void txtCount_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -135,8 +149,14 @@ namespace FurnitureSoftwareUI.Pages.Provider
 
         private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var selectType = cbType.SelectedItem as ProductType;
-            //imgType.Source = selectType.Image;
+            var selectType = cbType.SelectedItem as ProductType;
+           // imgType.Source = new BitmapImage(new Uri(selectType.Image, UriKind.RelativeOrAbsolute));
+        }
+
+        private void cbConfigurate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedConfigurate = cbConfigurate.SelectedItem as Configurator;
+            txtPrice.Text = $"{selectedConfigurate.Price}";
         }
     }
 }

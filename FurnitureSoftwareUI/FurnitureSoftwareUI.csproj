@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Classes\DBConnection.cs" />
+    <Compile Include="Data\Classes\DBMethodsFromConfigurate.cs" />
     <Compile Include="Data\Classes\DBMethodsFromTypeProduct.cs" />
     <Compile Include="Data\Classes\DBMethodsFromProducts.cs" />
     <Compile Include="Data\Classes\DBMethodsFromUser.cs" />

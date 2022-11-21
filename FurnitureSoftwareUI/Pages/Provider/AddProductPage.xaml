@@ -49,6 +49,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <TextBox
+                                 Margin="0,40,0,0"
                                  x:Name="txtName"
                                  FontSize="13"
                                  Text="{Binding Name}"
@@ -67,16 +68,25 @@
                                  Text="{Binding Count}"
                                  Style="{StaticResource MaterialDesignFilledTextBox}"
                                  material:HintAssist.Hint="Count" Width="200" Height="52"/>
-                                   
+                                    <CheckBox x:Name="cbIsActive" Content="IsActive" FontSize="15" Margin="0,15,0,0"/>
+
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBox
+                                 Margin="0,30,0,0"
+                                 x:Name="txtCode"
+                                 FontSize="13"
+                                 Text="{Binding ProductsImage.Code}"
+                                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                                 material:HintAssist.Hint="Code" Width="200" Height="52"/>
                                     <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
                                  x:Name="cbConfigurate"
+                                 SelectionChanged="cbConfigurate_SelectionChanged"
+                                 Margin="0,15,0,15" 
                                  material:HintAssist.Hint="Configurate" Width="200" Height="52"
                                  DisplayMemberPath="Name"/>
                                     <TextBox
-                                 MaxLength="40"
-                                 Margin="0,15,0,0"      
+                                 MaxLength="40"  
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto"
@@ -96,9 +106,15 @@
                             <RowDefinition Height="250"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="imgType" Source="{Binding ProductType.Type}" Grid.Row="0" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <StackPanel Grid.Row="0" Orientation="Vertical">
+                            <TextBlock Text="Image Type" FontSize="20"/>
+                            <Image x:Name="imgType" Source="{Binding ProductType.Image}" Margin="10" RenderOptions.BitmapScalingMode="HighQuality" Height="200"/>
+                        </StackPanel>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock x:Name="txtPrice" FontSize="20" Margin="0,0,0,5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Price :" FontSize="20"/>
+                                <TextBlock x:Name="txtPrice" FontSize="20" Margin="0,0,0,5"/>
+                            </StackPanel>
                             <Button
                     Foreground="Black"
                     Width="210"

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище SoftwareFurnitureModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище SoftwareFurnitureModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Authorization">
           <Key>
             <PropertyRef Name="id" />
@@ -35,6 +35,15 @@
           <Property Name="idProduct" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
         </EntityType>
+        <EntityType Name="Configurator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idOuter" Type="int" Nullable="false" />
+          <Property Name="idInner" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
         <EntityType Name="Discount">
           <Key>
             <PropertyRef Name="id" />
@@ -53,6 +62,14 @@
           <Property Name="idDiscount" Type="int" />
           <Property Name="isActual" Type="bit" />
         </EntityType>
+        <EntityType Name="InnerMaterial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="id" />
@@ -65,6 +82,14 @@
           <Property Name="idOrderList" Type="int" />
           <Property Name="idBasket" Type="int" />
         </EntityType>
+        <EntityType Name="OuterMaterial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="id" />
@@ -76,7 +101,7 @@
           <Property Name="isActual" Type="bit" />
           <Property Name="Descrition" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="idConfigurator" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductsImage">
           <Key>
@@ -93,6 +118,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Image" Type="image" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -159,6 +185,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Configurator_InnerMaterial">
+          <End Role="InnerMaterial" Type="Self.InnerMaterial" Multiplicity="1" />
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InnerMaterial">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Configurator">
+              <PropertyRef Name="idInner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Configurator_OuterMaterial">
+          <End Role="OuterMaterial" Type="Self.OuterMaterial" Multiplicity="1" />
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OuterMaterial">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Configurator">
+              <PropertyRef Name="idOuter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DiscountClient_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="DiscountClient" Type="Self.DiscountClient" Multiplicity="*" />
@@ -207,6 +257,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Configurator">
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configurator">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idConfigurator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_ProductsImage">
           <End Role="ProductsImage" Type="Self.ProductsImage" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -235,9 +297,12 @@
           <EntitySet Name="Authorization" EntityType="Self.Authorization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientBasket" EntityType="Self.ClientBasket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configurator" EntityType="Self.Configurator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiscountClient" EntityType="Self.DiscountClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InnerMaterial" EntityType="Self.InnerMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OuterMaterial" EntityType="Self.OuterMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsImage" EntityType="Self.ProductsImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
@@ -259,6 +324,14 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ClientBasket" EntitySet="ClientBasket" />
           </AssociationSet>
+          <AssociationSet Name="FK_Configurator_InnerMaterial" Association="Self.FK_Configurator_InnerMaterial">
+            <End Role="InnerMaterial" EntitySet="InnerMaterial" />
+            <End Role="Configurator" EntitySet="Configurator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Configurator_OuterMaterial" Association="Self.FK_Configurator_OuterMaterial">
+            <End Role="OuterMaterial" EntitySet="OuterMaterial" />
+            <End Role="Configurator" EntitySet="Configurator" />
+          </AssociationSet>
           <AssociationSet Name="FK_DiscountClient_Client" Association="Self.FK_DiscountClient_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="DiscountClient" EntitySet="DiscountClient" />
@@ -275,6 +348,10 @@
             <End Role="DiscountClient" EntitySet="DiscountClient" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_Configurator" Association="Self.FK_Product_Configurator">
+            <End Role="Configurator" EntitySet="Configurator" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_ProductsImage" Association="Self.FK_Product_ProductsImage">
             <End Role="ProductsImage" EntitySet="ProductsImage" />
             <End Role="Product" EntitySet="Product" />
@@ -284,7 +361,8 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SoftwareFurnitureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -326,6 +404,18 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_ClientBasket_Product" FromRole="ClientBasket" ToRole="Product" />
           <NavigationProperty Name="OrderProduct" Relationship="Self.FK_OrderProduct_ClientBasket" FromRole="ClientBasket" ToRole="OrderProduct" />
         </EntityType>
+        <EntityType Name="Configurator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idOuter" Type="Int32" Nullable="false" />
+          <Property Name="idInner" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="InnerMaterial" Relationship="Self.FK_Configurator_InnerMaterial" FromRole="Configurator" ToRole="InnerMaterial" />
+          <NavigationProperty Name="OuterMaterial" Relationship="Self.FK_Configurator_OuterMaterial" FromRole="Configurator" ToRole="OuterMaterial" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Configurator" FromRole="Configurator" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Discount">
           <Key>
             <PropertyRef Name="id" />
@@ -348,6 +438,15 @@
           <NavigationProperty Name="Discount" Relationship="Self.FK_DiscountClient_Discount" FromRole="DiscountClient" ToRole="Discount" />
           <NavigationProperty Name="OrderProduct" Relationship="Self.FK_OrderProduct_DiscountClient" FromRole="DiscountClient" ToRole="OrderProduct" />
         </EntityType>
+        <EntityType Name="InnerMaterial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Configurator" Relationship="Self.FK_Configurator_InnerMaterial" FromRole="InnerMaterial" ToRole="Configurator" />
+        </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="id" />
@@ -362,6 +461,15 @@
           <NavigationProperty Name="ClientBasket" Relationship="Self.FK_OrderProduct_ClientBasket" FromRole="OrderProduct" ToRole="ClientBasket" />
           <NavigationProperty Name="DiscountClient" Relationship="Self.FK_OrderProduct_DiscountClient" FromRole="OrderProduct" ToRole="DiscountClient" />
         </EntityType>
+        <EntityType Name="OuterMaterial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Configurator" Relationship="Self.FK_Configurator_OuterMaterial" FromRole="OuterMaterial" ToRole="Configurator" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="id" />
@@ -373,8 +481,9 @@
           <Property Name="isActual" Type="Boolean" />
           <Property Name="Descrition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="idConfigurator" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClientBasket" Relationship="Self.FK_ClientBasket_Product" FromRole="Product" ToRole="ClientBasket" />
+          <NavigationProperty Name="Configurator" Relationship="Self.FK_Product_Configurator" FromRole="Product" ToRole="Configurator" />
           <NavigationProperty Name="ProductsImage" Relationship="Self.FK_Product_ProductsImage" FromRole="Product" ToRole="ProductsImage" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
         </EntityType>
@@ -394,6 +503,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="Role">
@@ -486,6 +596,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Configurator_InnerMaterial">
+          <End Role="InnerMaterial" Type="Self.InnerMaterial" Multiplicity="1" />
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InnerMaterial">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Configurator">
+              <PropertyRef Name="idInner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Configurator_OuterMaterial">
+          <End Role="OuterMaterial" Type="Self.OuterMaterial" Multiplicity="1" />
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OuterMaterial">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Configurator">
+              <PropertyRef Name="idOuter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Configurator">
+          <End Role="Configurator" Type="Self.Configurator" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configurator">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idConfigurator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DiscountClient_Discount">
           <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
           <End Role="DiscountClient" Type="Self.DiscountClient" Multiplicity="*" />
@@ -538,9 +684,12 @@
           <EntitySet Name="Authorization" EntityType="Self.Authorization" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="ClientBasket" EntityType="Self.ClientBasket" />
+          <EntitySet Name="Configurator" EntityType="Self.Configurator" />
           <EntitySet Name="Discount" EntityType="Self.Discount" />
           <EntitySet Name="DiscountClient" EntityType="Self.DiscountClient" />
+          <EntitySet Name="InnerMaterial" EntityType="Self.InnerMaterial" />
           <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" />
+          <EntitySet Name="OuterMaterial" EntityType="Self.OuterMaterial" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductsImage" EntityType="Self.ProductsImage" />
           <EntitySet Name="ProductType" EntityType="Self.ProductType" />
@@ -569,6 +718,18 @@
           <AssociationSet Name="FK_OrderProduct_ClientBasket" Association="Self.FK_OrderProduct_ClientBasket">
             <End Role="ClientBasket" EntitySet="ClientBasket" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Configurator_InnerMaterial" Association="Self.FK_Configurator_InnerMaterial">
+            <End Role="InnerMaterial" EntitySet="InnerMaterial" />
+            <End Role="Configurator" EntitySet="Configurator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Configurator_OuterMaterial" Association="Self.FK_Configurator_OuterMaterial">
+            <End Role="OuterMaterial" EntitySet="OuterMaterial" />
+            <End Role="Configurator" EntitySet="Configurator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Configurator" Association="Self.FK_Product_Configurator">
+            <End Role="Configurator" EntitySet="Configurator" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_DiscountClient_Discount" Association="Self.FK_DiscountClient_Discount">
             <End Role="Discount" EntitySet="Discount" />
@@ -626,6 +787,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Configurator">
+            <EntityTypeMapping TypeName="SoftwareFurnitureModel.Configurator">
+              <MappingFragment StoreEntitySet="Configurator">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idOuter" ColumnName="idOuter" />
+                <ScalarProperty Name="idInner" ColumnName="idInner" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Discount">
             <EntityTypeMapping TypeName="SoftwareFurnitureModel.Discount">
               <MappingFragment StoreEntitySet="Discount">
@@ -646,6 +817,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="InnerMaterial">
+            <EntityTypeMapping TypeName="SoftwareFurnitureModel.InnerMaterial">
+              <MappingFragment StoreEntitySet="InnerMaterial">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OrderProduct">
             <EntityTypeMapping TypeName="SoftwareFurnitureModel.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
@@ -659,6 +839,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OuterMaterial">
+            <EntityTypeMapping TypeName="SoftwareFurnitureModel.OuterMaterial">
+              <MappingFragment StoreEntitySet="OuterMaterial">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="SoftwareFurnitureModel.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -669,7 +858,7 @@
                 <ScalarProperty Name="isActual" ColumnName="isActual" />
                 <ScalarProperty Name="Descrition" ColumnName="Descrition" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="idConfigurator" ColumnName="idConfigurator" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -688,6 +877,7 @@
               <MappingFragment StoreEntitySet="ProductType">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -88,5 +88,10 @@ namespace FurnitureSoftwareUI
         {
             FrameContainer.Navigate(new MarketPage(CurrentClient));
         }
+
+        private void btnProductControl_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new ProductControlPage(CurrentClient));
+        }
     }
 }

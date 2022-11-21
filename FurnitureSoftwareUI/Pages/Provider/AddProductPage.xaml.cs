@@ -12,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FurnitureSoftwareUI.Data.Model;
-using FurnitureSoftwareUI.Data.Classes;
-using FurnitureSoftwareUI.Pages;
 
 namespace FurnitureSoftwareUI.Pages.Provider
 {
     /// <summary>
-    /// Логика взаимодействия для ApplicationPage.xaml
+    /// Логика взаимодействия для AddProductPage.xaml
     /// </summary>
-    public partial class ApplicationPage : Page
+    public partial class AddProductPage : Page
     {
-        public ApplicationPage()
+        public AddProductPage()
         {
             InitializeComponent();
         }

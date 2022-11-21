@@ -66,7 +66,7 @@
                      Text="{Binding Balance}"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
                      material:HintAssist.Hint="Balance" Width="220" Height="52"/>
-                <Button     Margin="0,25,0,0"
+                <Button Margin="0,25,0,0"
                         Foreground="Black"
                         Width="220"
                         Height="40"

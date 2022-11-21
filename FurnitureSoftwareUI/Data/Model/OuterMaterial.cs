@@ -12,27 +12,19 @@ namespace FurnitureSoftwareUI.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class OuterMaterial
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public OuterMaterial()
         {
-            this.ClientBasket = new HashSet<ClientBasket>();
+            this.Configurator = new HashSet<Configurator>();
         }
     
         public int id { get; set; }
-        public int idType { get; set; }
         public string Name { get; set; }
-        public Nullable<int> idImage { get; set; }
-        public Nullable<bool> isActual { get; set; }
-        public string Descrition { get; set; }
-        public int Count { get; set; }
-        public int idConfigurator { get; set; }
+        public int Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientBasket> ClientBasket { get; set; }
-        public virtual Configurator Configurator { get; set; }
-        public virtual ProductsImage ProductsImage { get; set; }
-        public virtual ProductType ProductType { get; set; }
+        public virtual ICollection<Configurator> Configurator { get; set; }
     }
 }

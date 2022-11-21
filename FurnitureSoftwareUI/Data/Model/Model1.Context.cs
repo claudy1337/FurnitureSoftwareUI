@@ -28,9 +28,12 @@ namespace FurnitureSoftwareUI.Data.Model
         public virtual DbSet<Authorization> Authorization { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ClientBasket> ClientBasket { get; set; }
+        public virtual DbSet<Configurator> Configurator { get; set; }
         public virtual DbSet<Discount> Discount { get; set; }
         public virtual DbSet<DiscountClient> DiscountClient { get; set; }
+        public virtual DbSet<InnerMaterial> InnerMaterial { get; set; }
         public virtual DbSet<OrderProduct> OrderProduct { get; set; }
+        public virtual DbSet<OuterMaterial> OuterMaterial { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductsImage> ProductsImage { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }

@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FurnitureSoftwareUI.Data.Model;
+using FurnitureSoftwareUI.Data.Classes;
+using FurnitureSoftwareUI.Pages;
 
 namespace FurnitureSoftwareUI.Pages.Provider
 {
@@ -20,9 +23,60 @@ namespace FurnitureSoftwareUI.Pages.Provider
     /// </summary>
     public partial class ProductControlPage : Page
     {
-        public ProductControlPage()
+        public static Client Client;
+        public ProductControlPage(Client client)
         {
+            Client = client;
             InitializeComponent();
+            BindingData();
         }
+        private void BindingData()
+        {
+            cbTypeProduct.ItemsSource = DBConnection.connect.ProductType.ToList();
+            lstvProduct.ItemsSource = DBConnection.connect.Product.Where(p=>p.isActual == true && p.Count>0).ToList();
+        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Provider.AddProductPage());
+        }
+
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //sort
+        }
+
+        private void txtPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //sort
+        }
+        private void cbTypeProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtName.Text) && string.IsNullOrWhiteSpace(txtPrice.Text))
+                //sort type
+                return;
+            else if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                //sort price & type
+            }
+            else if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                //sort name & type
+            }
+            else
+            {
+                //all sort
+            }
+        }
+        private void txtClear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ProductControlPage(Client));
+        }
+
+        private void txtAddType_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Provider.AddTypeProductPage());
+        }
+
+        
     }
 }

@@ -91,6 +91,7 @@
 
                             <Button
                             x:Name="btnProductControl"
+                            Click="btnProductControl_Click"
                             Visibility="Hidden"
                             Foreground="Black"
                             Width="200"

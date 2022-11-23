@@ -12,27 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FurnitureSoftwareUI.Data.Model;
 using FurnitureSoftwareUI.Data.Classes;
+using FurnitureSoftwareUI.Data.Model;
 
 namespace FurnitureSoftwareUI.Pages.UserControl
 {
     /// <summary>
-    /// Логика взаимодействия для MarketPage.xaml
+    /// Логика взаимодействия для ActionСhoosePage.xaml
     /// </summary>
-    public partial class MarketPage : Page
+    public partial class ActionСhoosePage : Page
     {
         public static Client Client;
-
-        public MarketPage(Client client)
+        public ActionСhoosePage(Client client)
         {
             Client = client;
             InitializeComponent();
-            BindingData();
         }
-        private void BindingData()
+
+        private void BtnDiscount_Click(object sender, RoutedEventArgs e)
         {
-            lstvProduct.ItemsSource = DBConnection.connect.Product.Where(p => p.isActual == true).ToList();
+            NavigationService.Navigate(new DiscountPage());
+        }
+        private void BtnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrderClientPage(Client));
         }
     }
 }

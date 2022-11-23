@@ -163,14 +163,17 @@
     <Compile Include="Pages\Provider\ProductControlPage.xaml.cs">
       <DependentUpon>ProductControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserControl\BasketPage.xaml.cs">
-      <DependentUpon>BasketPage.xaml</DependentUpon>
+    <Compile Include="Pages\UserControl\ActionСhoosePage.xaml.cs">
+      <DependentUpon>ActionСhoosePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserControl\DiscountPage.xaml.cs">
       <DependentUpon>DiscountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserControl\MarketPage.xaml.cs">
-      <DependentUpon>MarketPage.xaml</DependentUpon>
+    <Compile Include="Pages\UserControl\OrderClientPage.xaml.cs">
+      <DependentUpon>OrderClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserControl\ProductInformationPage.xaml.cs">
+      <DependentUpon>ProductInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windws\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
@@ -226,7 +229,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserControl\BasketPage.xaml">
+    <Page Include="Pages\UserControl\ActionСhoosePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,7 +237,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserControl\MarketPage.xaml">
+    <Page Include="Pages\UserControl\OrderClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserControl\ProductInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

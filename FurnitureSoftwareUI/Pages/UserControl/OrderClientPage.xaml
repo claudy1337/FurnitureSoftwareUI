@@ -1,4 +1,4 @@
-﻿<Page x:Class="FurnitureSoftwareUI.Pages.UserControl.BasketPage"
+﻿<Page x:Class="FurnitureSoftwareUI.Pages.UserControl.OrderClientPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
       FontFamily="Poppins"
       Background="White"
-      Title="BasketPage">
+      Title="OrderClientPage">
 
     <Grid>
         

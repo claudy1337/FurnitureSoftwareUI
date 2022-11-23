@@ -16,6 +16,7 @@ using FurnitureSoftwareUI.Data.Model;
 using FurnitureSoftwareUI.Data.Classes;
 using FurnitureSoftwareUI.Pages;
 using System.Diagnostics;
+using FurnitureSoftwareUI.Pages.UserControl;
 
 namespace FurnitureSoftwareUI.Pages.Provider
 {
@@ -31,6 +32,14 @@ namespace FurnitureSoftwareUI.Pages.Provider
             InitializeComponent();
             if (DBMethodsFromUser.GetAdminRole(Client.Authorization.Login) == true)
             {
+                btnAdd.Visibility = Visibility.Hidden;
+                txtAddConfigurate.Visibility = Visibility.Hidden;
+                txtAddType.Visibility = Visibility.Hidden;
+                txtInfoProduct.Visibility = Visibility.Visible;
+            }
+            else if (DBMethodsFromUser.GetUserRole(Client.Authorization.Login) == true)
+            {
+                txtInfoProduct.Text = "Market";
                 btnAdd.Visibility = Visibility.Hidden;
                 txtAddConfigurate.Visibility = Visibility.Hidden;
                 txtAddType.Visibility = Visibility.Hidden;
@@ -162,10 +171,14 @@ namespace FurnitureSoftwareUI.Pages.Provider
 
         private void lstvProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DBMethodsFromUser.GetAdminRole(Client.Authorization.Login) == false)
+            var selectProduct = lstvProduct.SelectedItem as Product;
+            if (DBMethodsFromUser.GetProviderRole(Client.Authorization.Login) == true)
             {
-                var selectProduct = lstvProduct.SelectedItem as Product;
                 NavigationService.Navigate(new AddProductPage(selectProduct, Client));
+            }
+            else if (DBMethodsFromUser.GetUserRole(Client.Authorization.Login) == true)
+            {
+                NavigationService.Navigate(new ProductInformationPage(selectProduct, Client));
             }
                 
         }

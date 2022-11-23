@@ -93,7 +93,7 @@ namespace FurnitureSoftwareUI
 
         private void btnMarket_Click(object sender, RoutedEventArgs e)
         {
-            FrameContainer.Navigate(new MarketPage(CurrentClient));
+            FrameContainer.Navigate(new ProductControlPage(CurrentClient));
         }
 
         private void btnProductControl_Click(object sender, RoutedEventArgs e)
@@ -114,6 +114,11 @@ namespace FurnitureSoftwareUI
         private void btnMoreInformation_Click(object sender, RoutedEventArgs e)
         {
             FrameContainer.Navigate(new MoreInformation(CurrentClient));
+        }
+
+        private void btnDiscount_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new ActionСhoosePage(CurrentClient));
         }
     }
 }

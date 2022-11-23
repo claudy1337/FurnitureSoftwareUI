@@ -12,20 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FurnitureSoftwareUI.Data.Model;
 using FurnitureSoftwareUI.Data.Classes;
-using FurnitureSoftwareUI.Pages;
+using FurnitureSoftwareUI.Data.Model;
 
 namespace FurnitureSoftwareUI.Pages.UserControl
 {
     /// <summary>
-    /// Логика взаимодействия для BasketPage.xaml
+    /// Логика взаимодействия для ProductInformationPage.xaml
     /// </summary>
-    public partial class BasketPage : Page
+    public partial class ProductInformationPage : Page
     {
-        public BasketPage()
+        public static Product Product;
+        public static Client Client;
+        public ProductInformationPage(Product product, Client client)
         {
+            Product = product;
+            Client = client;
             InitializeComponent();
+            this.DataContext = Product;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

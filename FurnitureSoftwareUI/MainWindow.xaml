@@ -49,6 +49,7 @@
 
                             <Button
                             Visibility="Hidden"
+                            Click="btnDiscount_Click"
                             x:Name="btnDiscount"
                             Foreground="Black"
                             Width="200"

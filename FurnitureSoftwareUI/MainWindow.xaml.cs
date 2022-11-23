@@ -48,6 +48,12 @@ namespace FurnitureSoftwareUI
                 txtHome.Visibility = Visibility.Hidden;
                 btnDiscount.Visibility = Visibility.Hidden;
             }
+            else
+            {
+                txtHome.Visibility = Visibility.Visible;
+                btnMarket.Visibility = Visibility.Visible;
+                btnMarket.Visibility = Visibility.Visible;
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

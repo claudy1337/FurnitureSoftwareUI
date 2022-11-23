@@ -78,6 +78,7 @@
     <Compile Include="Data\Classes\DBMethodsFromTypeProduct.cs" />
     <Compile Include="Data\Classes\DBMethodsFromProducts.cs" />
     <Compile Include="Data\Classes\DBMethodsFromUser.cs" />
+    <Compile Include="Data\Classes\DBMethodsSorting.cs" />
     <Compile Include="Data\Model\Authorization.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

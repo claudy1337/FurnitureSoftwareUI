@@ -26,14 +26,6 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             return GetProducts().FirstOrDefault(p => p.Name == name);
         }
-        public static IEnumerable<Product> GetProducts(int idType, bool isAcive = true)
-        {
-            return GetProducts().Where(p => p.idType == idType && p.isActual == isAcive && p.Count > 0).ToList();
-        }
-        public static IEnumerable<Product> GetProducts(string name)
-        {
-            return GetProducts().Where(p => p.Name == name && p.isActual == true && p.Count == 0).ToList();
-        }
         public static ProductsImage GetProductsImage(string code)
         {
             return GetProductsImages().FirstOrDefault(i=>i.Code == code);
@@ -93,7 +85,7 @@ namespace FurnitureSoftwareUI.Data.Classes
                     };
                     DBConnection.connect.Product.Add(product);
                     DBConnection.connect.SaveChanges();
-                    MessageBox.Show("добавлен");
+                    MessageBox.Show("added");
 
                 }
                 else
@@ -107,7 +99,7 @@ namespace FurnitureSoftwareUI.Data.Classes
             }
             catch (FormatException)
             {
-                MessageBox.Show("ошибка формата");
+                MessageBox.Show("format error");
                 return;
             }
         }

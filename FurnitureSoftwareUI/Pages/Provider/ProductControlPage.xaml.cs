@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using FurnitureSoftwareUI.Data.Model;
 using FurnitureSoftwareUI.Data.Classes;
 using FurnitureSoftwareUI.Pages;
+using System.Diagnostics;
 
 namespace FurnitureSoftwareUI.Pages.Provider
 {
@@ -34,7 +35,9 @@ namespace FurnitureSoftwareUI.Pages.Provider
         {
             cbTypeProduct.ItemsSource = DBConnection.connect.ProductType.ToList();
             lstvProduct.ItemsSource = DBConnection.connect.Product.Where(p=>p.isActual == true && p.Count>0).ToList();
+            cbConfigurator.ItemsSource = DBConnection.connect.Configurator.ToList();
         }
+        
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Provider.AddProductPage(null, Client));
@@ -42,29 +45,74 @@ namespace FurnitureSoftwareUI.Pages.Provider
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //sort
+            lstvProduct.ItemsSource = DBMethodsSorting.GetProductsName(txtName.Text);
+            txtPrice.Text = null;
+            cbConfigurator.SelectedIndex = -1;
+            cbTypeProduct.SelectedIndex = -1;
         }
 
         private void txtPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //sort
-        }
-        private void cbTypeProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtName.Text) && string.IsNullOrWhiteSpace(txtPrice.Text))
-                //sort type
-                return;
-            else if (string.IsNullOrWhiteSpace(txtName.Text))
+            var selectTypeProduct = cbTypeProduct.SelectedItem as ProductType;
+            var selectConfigurator = cbConfigurator.SelectedItem as Configurator;
+            if (selectConfigurator == null && selectTypeProduct == null)
             {
-                //sort price & type
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsPrice(Convert.ToInt32(txtPrice.Text));
             }
-            else if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            else if (selectConfigurator == null)
             {
-                //sort name & type
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsPriceOrType(selectTypeProduct.id, Convert.ToInt32(txtPrice.Text));
+            }
+            else if (selectTypeProduct == null)
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsPriceOrConfigurate(selectConfigurator.id, Convert.ToInt32(txtPrice.Text));
             }
             else
             {
-                //all sort
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsAllSort(selectConfigurator.id, Convert.ToInt32(txtPrice.Text), selectTypeProduct.id);
+            }
+
+        }
+        private void cbTypeProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectTypeProduct = cbTypeProduct.SelectedItem as ProductType;
+            var selectConfigurator = cbConfigurator.SelectedItem as Configurator;
+            if (string.IsNullOrWhiteSpace(txtPrice.Text) && selectConfigurator == null)
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsType(selectTypeProduct.id);
+            }
+            else if (selectConfigurator ==null)
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsPriceOrType(selectTypeProduct.id, Convert.ToInt32(txtPrice.Text));
+            }
+            else if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsTypeOrConfigurator(selectConfigurator.id, selectTypeProduct.id);
+            }
+            else
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsAllSort(selectConfigurator.id, Convert.ToInt32(txtPrice.Text), selectTypeProduct.id);
+            }
+        }
+        private void cbConfigurator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectTypeProduct = cbTypeProduct.SelectedItem as ProductType;
+            var selectConfigurator = cbConfigurator.SelectedItem as Configurator;
+            if (string.IsNullOrWhiteSpace(txtPrice.Text) && selectTypeProduct == null)
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsConfigurator(selectConfigurator.id);
+            }
+            else if (selectTypeProduct == null)
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsPriceOrConfigurate(selectConfigurator.id, Convert.ToInt32(txtPrice.Text));
+            }
+            else if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsTypeOrConfigurator(selectConfigurator.id, selectTypeProduct.id);
+            }
+            else
+            {
+                lstvProduct.ItemsSource = DBMethodsSorting.GetProductsAllSort(selectConfigurator.id, Convert.ToInt32(txtPrice.Text), selectTypeProduct.id);
             }
         }
         private void txtClear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -76,12 +124,6 @@ namespace FurnitureSoftwareUI.Pages.Provider
         {
             NavigationService.Navigate(new Provider.AddTypeProductPage());
         }
-
-        private void cbConfigurator_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void txtAddConfigurate_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new ApplicationPage());

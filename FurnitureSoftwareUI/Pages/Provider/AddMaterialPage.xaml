@@ -16,53 +16,58 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Outer Material" FontSize="25"/>
-            <TextBox x:Name="txtNameOuter"
+
+        <material:Card Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="270" Height="300">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Outer Material" FontSize="25" HorizontalAlignment="Center"/>
+                <TextBox x:Name="txtNameOuter"
                      Margin="0,25,0,20"
                      VerticalContentAlignment="Center"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
                      material:HintAssist.Hint="Name Outer" Width="220" Height="52"/>
-            <TextBox x:Name="txtPriceOuter"
+                <TextBox x:Name="txtPriceOuter"
                      Margin="0,0,0,20"
                      PreviewTextInput="txtPriceOuter_PreviewTextInput"
                      VerticalContentAlignment="Center"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
                      material:HintAssist.Hint="Price Outer" Width="220" Height="52"/>
-            <Button
+                <Button
                     Foreground="Black"
                     Width="210"
                     Height="40"
                     Background="Transparent"
                     Content="Add" 
                     x:Name="btnAddOuter" Click="btnAddOuter_Click" Cursor="Hand"/>
-            
-        </StackPanel>
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Inner Material" FontSize="25"/>
-            <TextBox x:Name="txtNameInner"
+            </StackPanel>
+        </material:Card>
+
+        <material:Card Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="270" Height="300">  
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Inner Material" FontSize="25" HorizontalAlignment="Center"/>
+                <TextBox x:Name="txtNameInner"
                      Margin="0,25,0,20"
                      VerticalContentAlignment="Center"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
                      material:HintAssist.Hint="Name Inner" Width="220" Height="52"/>
 
-            <TextBox x:Name="txtPriceInner"
+                <TextBox x:Name="txtPriceInner"
                      Margin="0,0,0,20"
                      PreviewTextInput="txtPriceInner_PreviewTextInput"
                      VerticalContentAlignment="Center"
                      FontSize="13"
                      Style="{StaticResource MaterialDesignFilledTextBox}"
                      material:HintAssist.Hint="Price Inner" Width="220" Height="52"/>
-            <Button
+                <Button
                     Foreground="Black"
                     Width="210"
                     Height="40"
                     Background="Transparent"
                     Content="Add" 
                     x:Name="btnAddInner" Click="btnAddInner_Click" Cursor="Hand"/>
-        </StackPanel>
+            </StackPanel>
+        </material:Card>
     </Grid>
 </Page>

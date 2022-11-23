@@ -31,6 +31,13 @@ namespace FurnitureSoftwareUI.Pages
             if (DBMethodsFromUser.GetProviderRole(Client.Authorization.Login) == true)
             {
                 txtBalance.Visibility = Visibility.Hidden;
+                txtStat.Visibility = Visibility.Hidden;
+                cbRole.IsReadOnly = true;
+                cbRole.IsEnabled = false;
+            }
+            else if (DBMethodsFromUser.GetUserRole(Client.Authorization.Login) == true)
+            {
+                cbRole.IsEnabled = false;
             }
             BindingData();
         }
@@ -47,7 +54,7 @@ namespace FurnitureSoftwareUI.Pages
                 if (cbRole.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtName.Text) ||
                 string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
                 {
-                    MessageBox.Show("заполните все поля");
+                    MessageBox.Show("Fill in all the fields");
                     return;
                 }
                 else

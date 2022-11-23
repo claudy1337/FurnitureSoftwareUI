@@ -86,7 +86,7 @@
                                  material:HintAssist.Hint="Configurate" Width="200" Height="52"
                                  DisplayMemberPath="Name"/>
                                     <TextBox
-                                 MaxLength="40"  
+                                 MaxLength="100"  
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto"

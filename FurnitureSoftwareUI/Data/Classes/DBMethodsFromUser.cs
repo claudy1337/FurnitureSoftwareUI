@@ -45,16 +45,16 @@ namespace FurnitureSoftwareUI.Data.Classes
                     getClient.Balance = balance;
                     getClient.Authorization.Password = password;
                     DBConnection.connect.SaveChanges();
-                    MessageBox.Show("данные поменялись");
+                    MessageBox.Show("data has changed");
                 }
                 else
                 {
-                    MessageBox.Show("пользлователя нет");
+                    MessageBox.Show("dont have account");
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("формат не верный");
+                MessageBox.Show("format is not correct");
                 return;
             }
 
@@ -74,6 +74,12 @@ namespace FurnitureSoftwareUI.Data.Classes
             ObservableCollection<Client> admin = new ObservableCollection<Client>(DBConnection.connect.Client);
             var currentAdmin = admin.Where(a => a.Authorization.Login == login && a.idRole == 0).FirstOrDefault();
             return currentAdmin != null;
+        }
+        public static bool GetUserRole(string login)
+        {
+            ObservableCollection<Client> user = new ObservableCollection<Client>(DBConnection.connect.Client);
+            var currentUser = user.Where(a => a.Authorization.Login == login && a.idRole == 1).FirstOrDefault();
+            return currentUser != null;
         }
         public static bool GetProviderRole(string login)
         {
@@ -106,7 +112,7 @@ namespace FurnitureSoftwareUI.Data.Classes
                 }
                 else
                 {
-                    MessageBox.Show("пользователь уже существует");
+                    MessageBox.Show("account already exists");
                 }
             }
             catch(FormatException)

@@ -36,8 +36,9 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" VerticalAlignment="Center">
-                            <TextBlock x:Name="txtHome" Text="Home" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
-                            <Button 
+                            <TextBlock Visibility="Hidden" x:Name="txtHome" Text="Home" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
+                            <Button
+                            Visibility="Hidden"
                             x:Name="btnMarket"
                             Click="btnMarket_Click"
                             Foreground="Black"
@@ -47,6 +48,7 @@
                             Content="Market" Cursor="Hand"/>
 
                             <Button
+                            Visibility="Hidden"
                             x:Name="btnDiscount"
                             Foreground="Black"
                             Width="200"

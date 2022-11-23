@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -149,8 +150,13 @@ namespace FurnitureSoftwareUI.Pages.Provider
 
         private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectType = cbType.SelectedItem as ProductType;
-           // imgType.Source = new BitmapImage(new Uri(selectType.Image, UriKind.RelativeOrAbsolute));
+            ProductType type = (ProductType)cbType.SelectedItem;
+            MemoryStream byteStream = new MemoryStream(type.Image);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = byteStream;
+            image.EndInit();
+            imgType.Source = image;
         }
 
         private void cbConfigurate_SelectionChanged(object sender, SelectionChangedEventArgs e)

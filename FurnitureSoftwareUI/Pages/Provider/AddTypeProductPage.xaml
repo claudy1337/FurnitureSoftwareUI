@@ -24,7 +24,7 @@
                         Width="220"
                         Height="40"
                         Background="Transparent"
-                        Content="Edit" 
+                        Content="Add" 
                         x:Name="btnAdd"
                         Click="btnAdd_Click"
                         Cursor="Hand"/>

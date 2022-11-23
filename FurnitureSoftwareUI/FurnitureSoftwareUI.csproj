@@ -142,11 +142,11 @@
     <Compile Include="Pages\AdminControl\ClientControlPage.xaml.cs">
       <DependentUpon>ClientControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminControl\MoreInformationPage.xaml.cs">
-      <DependentUpon>MoreInformationPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdminControl\ClientOrderPage.xaml.cs">
+      <DependentUpon>ClientOrderPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminControl\OrderPage.xaml.cs">
-      <DependentUpon>OrderPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdminControl\MoreInformation.xaml.cs">
+      <DependentUpon>MoreInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Provider\AddMaterialPage.xaml.cs">
       <DependentUpon>AddMaterialPage.xaml</DependentUpon>
@@ -198,11 +198,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminControl\MoreInformationPage.xaml">
+    <Page Include="Pages\AdminControl\ClientOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminControl\OrderPage.xaml">
+    <Page Include="Pages\AdminControl\MoreInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using System.IO;
 using FurnitureSoftwareUI.Properties;
 using System.Security.Principal;
+using System.Data.Entity.Infrastructure;
 
 namespace FurnitureSoftwareUI.Data.Classes
 {
@@ -124,30 +125,38 @@ namespace FurnitureSoftwareUI.Data.Classes
         {
             try
             {
-                byte[] image = File.ReadAllBytes("account.png");
-                if (CurrentAuthorization != null)
+                try
                 {
-                    Client client = new Client
+                    byte[] image = File.ReadAllBytes("account.png");
+                    if (CurrentAuthorization != null)
                     {
-                        idAuth = CurrentAuthorization.id,
-                        Name = name,
-                        idRole = role,
-                        Balance = 0,
-                        Image = image
-                    };
-                    CurrentClient = client;
-                    DBConnection.connect.Client.Add(client);
-                    DBConnection.connect.SaveChanges();
+                        Client client = new Client
+                        {
+                            idAuth = CurrentAuthorization.id,
+                            Name = name,
+                            idRole = role,
+                            Balance = 0,
+                            Image = image
+                        };
+                        CurrentClient = client;
+                        DBConnection.connect.Client.Add(client);
+                        DBConnection.connect.SaveChanges();
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
-                else
+                catch (FormatException)
                 {
                     return;
                 }
             }
-            catch(FormatException)
+            catch(DbUpdateException)
             {
                 return;
             }
+            
         }
     }
 }

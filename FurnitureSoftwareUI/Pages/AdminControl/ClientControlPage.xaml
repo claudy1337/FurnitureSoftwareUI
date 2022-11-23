@@ -12,6 +12,69 @@
       Title="ClientControlPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox x:Name="txtName"
+                     TextChanged="txtName_TextChanged"
+                     VerticalContentAlignment="Center"
+                     FontSize="13"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     material:HintAssist.Hint="Name" Width="210" Height="52"/>
+
+            <TextBox x:Name="txtLogin"
+                     Margin="0,15,0,15"
+                     TextChanged="txtLogin_TextChanged"
+                     VerticalContentAlignment="Center"
+                     FontSize="13"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     material:HintAssist.Hint="Login" Width="210" Height="52"/>
+            
+            <TextBox x:Name="txtPassword"
+                     TextChanged="txtSurname_TextChanged"
+                     VerticalContentAlignment="Center"
+                     FontSize="13"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     material:HintAssist.Hint="Password" Width="210" Height="52"/>
+            
+            <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      x:Name="cbRole"
+                      Margin="0,15,0,15"
+                      SelectionChanged="cbRole_SelectionChanged"
+                      DisplayMemberPath="Type"
+                      material:HintAssist.Hint="Role" Width="210" Height="52"/>
+
+            <Button 
+                    Foreground="Black"
+                    Width="210"
+                    Height="40"
+                    Background="Transparent"
+                    Content="Add" 
+                    x:Name="btnAdd"
+                    Click="btnAdd_Click" Cursor="Hand"/>
+            <TextBlock x:Name="txtClear" MouseLeftButtonDown="txtClear_MouseLeftButtonDown"  Text="Clear" FontSize="13" HorizontalAlignment="Right" Margin="0,5,5,0"/>
+        </StackPanel>
+        <ListView x:Name="lstvClients" SelectionChanged="lstvClients_SelectionChanged" Grid.Column="1" HorizontalContentAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <material:Card Width="300" Height="330">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="225"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="1" Orientation="Vertical">
+                                <TextBlock Text="{Binding Authorization.Login,StringFormat=Login: {0}}" FontSize="20"/>
+                                <TextBlock Text="{Binding Name}" FontSize="20"/>
+                                <TextBlock Text="{Binding Role.Type}" FontSize="20"/>
+                            </StackPanel>
+                            <Image Grid.Row="0" Margin="10" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Image}"/>
+                        </Grid>
+                    </material:Card>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

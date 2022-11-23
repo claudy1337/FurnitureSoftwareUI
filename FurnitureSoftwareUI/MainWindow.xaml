@@ -62,6 +62,7 @@
                             <TextBlock Visibility="Hidden" x:Name="txtAdmin" Text="Admin Panel" HorizontalAlignment="Center" Margin="0,5,0,5" FontSize="20"/>
                             <Button
                             x:Name="btnClientControl"
+                            Click="btnClientControl_Click"
                             Visibility="Hidden"
                             Foreground="Black"
                             Width="200"
@@ -71,6 +72,7 @@
 
                             <Button
                             x:Name="btnMoreInformation"
+                            Click="btnMoreInformation_Click"
                             Visibility="Hidden"
                             Foreground="Black"
                             Width="200"

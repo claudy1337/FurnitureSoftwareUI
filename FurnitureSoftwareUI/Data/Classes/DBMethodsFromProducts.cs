@@ -44,13 +44,17 @@ namespace FurnitureSoftwareUI.Data.Classes
                 };
                 DBConnection.connect.ProductsImage.Add(prodct);  
             }
-            else
+            DBConnection.connect.SaveChanges();
+        }
+        public static void EditImageProduct(byte[]image1, byte[]image2, byte[]image3, string code)
+        {
+            var getProductImage = GetProductsImage(code);
+            if (getProductImage != null)
             {
                 getProductImage.Image1 = image1;
                 getProductImage.Image2 = image2;
                 getProductImage.Image3 = image3;
             }
-            DBConnection.connect.SaveChanges();
         }
         public static void EditProduct(Product product, int count, bool isActual, string description)
         {

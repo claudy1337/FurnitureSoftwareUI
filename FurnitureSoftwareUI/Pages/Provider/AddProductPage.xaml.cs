@@ -51,7 +51,11 @@ namespace FurnitureSoftwareUI.Pages.Provider
         private void BindingNotNullDataFurniture()
         {
             this.DataContext = Product;
+            image1 = Product.ProductsImage.Image1;
+            image2 = Product.ProductsImage.Image2;
+            image3 = Product.ProductsImage.Image3;
             txtAddOrEdit.Text = "Product Edit";
+            txtCode.IsReadOnly = true; 
             cbType.SelectedItem = Product.ProductType.Type;
             btnAdd.Content = "Edit";
             txtName.IsReadOnly = true;
@@ -79,7 +83,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
         {
             var selectedType = cbType.SelectedItem as ProductType;
             var selectedConfigurate = cbConfigurate.SelectedItem as Configurator;
-            DBMethodsFromProducts.AddImageProduct(image1, image2, image3, txtCode.Text);
+            
             var getImage = DBMethodsFromProducts.GetProductsImage(txtCode.Text);
             if (Product == null)
             {
@@ -90,13 +94,14 @@ namespace FurnitureSoftwareUI.Pages.Provider
                 }
                 else
                 {
-
+                    DBMethodsFromProducts.AddImageProduct(image1, image2, image3, txtCode.Text);
                     DBMethodsFromProducts.AddProduct(txtCode.Text, txtName.Text, txtDescrition.Text, selectedType.id, Convert.ToInt32(txtCount.Text), Convert.ToBoolean(cbIsActive.IsChecked), Convert.ToInt32(selectedConfigurate.Price), selectedConfigurate.id);
                     NavigationService.Navigate(new ProductControlPage(Client));
                 }
             }
             else
             {
+                DBMethodsFromProducts.EditImageProduct(image1, image2, image3, txtCode.Text);
                 DBMethodsFromProducts.EditProduct(Product, Convert.ToInt32(txtCount.Text), Convert.ToBoolean(cbIsActive.IsChecked), txtDescrition.Text);
             }
         }

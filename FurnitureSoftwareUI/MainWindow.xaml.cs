@@ -51,6 +51,7 @@ namespace FurnitureSoftwareUI
             else
             {
                 txtHome.Visibility = Visibility.Visible;
+                btnDiscount.Visibility = Visibility.Visible;
                 btnMarket.Visibility = Visibility.Visible;
                 btnMarket.Visibility = Visibility.Visible;
             }
@@ -103,6 +104,16 @@ namespace FurnitureSoftwareUI
         private void btnApp_Click(object sender, RoutedEventArgs e)
         {
             FrameContainer.Navigate(new ApplicationPage());
+        }
+
+        private void btnClientControl_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new ClientControlPage());
+        }
+
+        private void btnMoreInformation_Click(object sender, RoutedEventArgs e)
+        {
+            FrameContainer.Navigate(new MoreInformation(CurrentClient));
         }
     }
 }

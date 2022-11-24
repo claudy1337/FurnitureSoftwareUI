@@ -37,7 +37,7 @@ namespace FurnitureSoftwareUI.Data.Classes
                     idInner = inner.id,
                     idOuter = outer.id,
                     Name = name,
-                    Price = price
+                    Price = price.ToString()
                 };
                 DBConnection.connect.Configurator.Add(configurator);
                 DBConnection.connect.SaveChanges();

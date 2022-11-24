@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using FurnitureSoftwareUI.Data.Classes;
 using FurnitureSoftwareUI.Data.Model;
 using FurnitureSoftwareUI.Pages.Provider;
+using FurnitureSoftwareUI.Pages.UserControl;
 
 namespace FurnitureSoftwareUI.Pages.AdminControl
 {
@@ -32,7 +33,7 @@ namespace FurnitureSoftwareUI.Pages.AdminControl
 
         private void BtnClientOrder_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ClientOrderPage());
+            NavigationService.Navigate(new OrderClientPage(Client));
         }
 
         private void btnProduct_Click(object sender, RoutedEventArgs e)

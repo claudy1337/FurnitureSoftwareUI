@@ -12,6 +12,47 @@
       Title="OrderClientPage">
 
     <Grid>
-        
+        <ListView x:Name="lstvOrderClient" HorizontalContentAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <material:Card Width="400" Height="350">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="260"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="{Binding DiscountClient.Client.Authorization.Login}" FontSize="15"/>
+                                        <TextBlock FontSize="{Binding DiscountClient.Client.Name}" Margin="0,5,0,5"/>
+                                        <TextBlock FontSize="{Binding DiscountClient.Client.Surname}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Product.Name}" FontSize="15"/>
+                                        <TextBlock Text="{Binding Count}" FontSize="15" Margin="0,5,0,5"/>
+                                        <TextBlock Text="{Binding Price}" FontSize="15"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0">
+                                <Grid Height="260">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Margin="10" Source="{Binding DiscountClient.Client.Image}"/>
+                                    <Image Grid.Column="1" Margin="10" Source="{Binding Product.ProductsImage.Image1}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </material:Card>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

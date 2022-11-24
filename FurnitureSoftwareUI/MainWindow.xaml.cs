@@ -118,7 +118,7 @@ namespace FurnitureSoftwareUI
 
         private void btnDiscount_Click(object sender, RoutedEventArgs e)
         {
-            FrameContainer.Navigate(new ActionСhoosePage(CurrentClient));
+            FrameContainer.Navigate(new OrderClientPage(CurrentClient));
         }
     }
 }

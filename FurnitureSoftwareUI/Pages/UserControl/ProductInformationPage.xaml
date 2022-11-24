@@ -61,20 +61,26 @@
                                  Text="{Binding ProductType.Type}"
                                  material:HintAssist.Hint="Type" Width="200" Height="52"
                                  Margin="0,15,0,15"/>
+                                    <TextBlock x:Name="txtBindingCount" Text="{Binding Count, StringFormat=Count:{0}}" FontSize="15"/>
                                     <TextBox
-                                 IsReadOnly="True"
                                  x:Name="txtCount"
                                  FontSize="13"
-                                 Text="{Binding Count}"
+                                 PreviewTextInput="txtCount_PreviewTextInput"
                                  Style="{StaticResource MaterialDesignFilledTextBox}"
                                  material:HintAssist.Hint="Count" Width="200" Height="52"/>
                                     <CheckBox IsEnabled="False" IsChecked="{Binding isActual}" x:Name="cbIsActive" Content="IsActive" FontSize="15" Margin="0,15,0,0"/>
 
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    
+                                    <TextBlock x:Name="Txtprocent" FontSize="15" Margin="0,30,0,5"/>
+                                    <ComboBox Width="200" Height="52" 
+                                              material:HintAssist.Hint="Discount"
+                                              x:Name="cbDiscount"
+                                              SelectionChanged="cbDiscount_SelectionChanged"
+                                              DisplayMemberPath="Name"
+                                              Style="{StaticResource MaterialDesignFilledComboBox}"/>
                                     <TextBox IsReadOnly="True" Style="{StaticResource MaterialDesignFilledTextBox}"
-                                 x:Name="cbConfigurate"
+                                 x:Name="txtConfigurate"
                                  Text="{Binding Configurator.Name}"
                                  Margin="0,15,0,15" 
                                  material:HintAssist.Hint="Configurate" Width="200" Height="52"/>
@@ -114,7 +120,7 @@
                     Width="210"
                     Height="40"
                     Background="Transparent"
-                    Content="Add Basket" 
+                    Content="Buy" 
                     x:Name="btnAdd"
                     Click="btnAdd_Click" Cursor="Hand"/>
                         </StackPanel>

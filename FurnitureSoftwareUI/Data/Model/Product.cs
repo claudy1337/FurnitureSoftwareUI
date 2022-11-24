@@ -17,7 +17,7 @@ namespace FurnitureSoftwareUI.Data.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.ClientBasket = new HashSet<ClientBasket>();
+            this.OrderProduct = new HashSet<OrderProduct>();
         }
     
         public int id { get; set; }
@@ -29,9 +29,9 @@ namespace FurnitureSoftwareUI.Data.Model
         public int Count { get; set; }
         public int idConfigurator { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientBasket> ClientBasket { get; set; }
         public virtual Configurator Configurator { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderProduct> OrderProduct { get; set; }
         public virtual ProductsImage ProductsImage { get; set; }
         public virtual ProductType ProductType { get; set; }
     }

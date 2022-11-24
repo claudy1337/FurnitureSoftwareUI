@@ -17,7 +17,6 @@ namespace FurnitureSoftwareUI.Data.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
-            this.ClientBasket = new HashSet<ClientBasket>();
             this.DiscountClient = new HashSet<DiscountClient>();
         }
     
@@ -27,12 +26,10 @@ namespace FurnitureSoftwareUI.Data.Model
         public int idAuth { get; set; }
         public int idRole { get; set; }
         public byte[] Image { get; set; }
-        public Nullable<int> Balance { get; set; }
+        public string Balance { get; set; }
     
         public virtual Authorization Authorization { get; set; }
         public virtual Role Role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientBasket> ClientBasket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DiscountClient> DiscountClient { get; set; }
     }

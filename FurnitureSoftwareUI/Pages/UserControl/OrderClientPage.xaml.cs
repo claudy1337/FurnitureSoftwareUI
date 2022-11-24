@@ -25,7 +25,16 @@ namespace FurnitureSoftwareUI.Pages.UserControl
         public static Client Client;
         public OrderClientPage(Client client)
         {
+            Client = client;
             InitializeComponent();
+            if (DBMethodsFromUser.GetAdminRole(Client.Authorization.Login) == true)
+            {
+                lstvOrderClient.ItemsSource = DBConnection.connect.OrderProduct.ToList();
+            }
+            else if (DBMethodsFromUser.GetUserRole(Client.Authorization.Login) == true)
+            {
+                lstvOrderClient.ItemsSource = DBConnection.connect.OrderProduct.Where(p=>p.DiscountClient.idClient == Client.id).ToList();
+            }
         }
     }
 }

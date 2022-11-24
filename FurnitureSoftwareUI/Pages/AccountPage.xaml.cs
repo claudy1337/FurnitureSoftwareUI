@@ -59,7 +59,7 @@ namespace FurnitureSoftwareUI.Pages
                 }
                 else
                 {
-                    DBMethodsFromUser.EditClient(Client, txtPassword.Text, txtName.Text, txtLastName.Text, Convert.ToInt32(txtBalance.Text));
+                    DBMethodsFromUser.EditClient(Client, txtPassword.Text, txtName.Text, txtLastName.Text, txtBalance.Text);
                 }
             }
             catch(FormatException)
@@ -76,7 +76,8 @@ namespace FurnitureSoftwareUI.Pages
 
         private void txtBalance_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[0-9]");
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

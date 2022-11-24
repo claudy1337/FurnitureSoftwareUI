@@ -19,10 +19,9 @@ namespace FurnitureSoftwareUI.Data.Model
         public Nullable<int> Count { get; set; }
         public string Price { get; set; }
         public Nullable<System.DateTime> date { get; set; }
-        public Nullable<int> idOrderList { get; set; }
-        public Nullable<int> idBasket { get; set; }
+        public Nullable<int> idProduct { get; set; }
     
-        public virtual ClientBasket ClientBasket { get; set; }
         public virtual DiscountClient DiscountClient { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

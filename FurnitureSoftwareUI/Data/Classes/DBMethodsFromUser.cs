@@ -34,7 +34,7 @@ namespace FurnitureSoftwareUI.Data.Classes
             var currentClient = clients.Where(c => c.Authorization.Login == login && c.Authorization.Password == password).FirstOrDefault();
             return currentClient != null;
         }
-        public static void EditClient(Client client, string password, string name, string surname, int balance)
+        public static void EditClient(Client client, string password, string name, string surname, string balance)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace FurnitureSoftwareUI.Data.Classes
                             idAuth = CurrentAuthorization.id,
                             Name = name,
                             idRole = role,
-                            Balance = 0,
+                            Balance = "0",
                             Image = image
                         };
                         CurrentClient = client;

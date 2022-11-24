@@ -36,10 +36,16 @@ namespace FurnitureSoftwareUI.Pages.Provider
                 txtAddConfigurate.Visibility = Visibility.Hidden;
                 txtAddType.Visibility = Visibility.Hidden;
                 txtInfoProduct.Visibility = Visibility.Visible;
+                lstvProduct.ItemsSource = DBConnection.connect.Product.ToList();
+            }
+            else if (DBMethodsFromUser.GetProviderRole(Client.Authorization.Login)==true)
+            {
+                lstvProduct.ItemsSource = DBConnection.connect.Product.ToList();
             }
             else if (DBMethodsFromUser.GetUserRole(Client.Authorization.Login) == true)
             {
                 txtInfoProduct.Text = "Market";
+                lstvProduct.ItemsSource = DBConnection.connect.Product.Where(p=>p.Count>0 && p.isActual==true).ToList();
                 btnAdd.Visibility = Visibility.Hidden;
                 txtAddConfigurate.Visibility = Visibility.Hidden;
                 txtAddType.Visibility = Visibility.Hidden;
@@ -49,7 +55,6 @@ namespace FurnitureSoftwareUI.Pages.Provider
         private void BindingData()
         {
             cbTypeProduct.ItemsSource = DBConnection.connect.ProductType.ToList();
-            lstvProduct.ItemsSource = DBConnection.connect.Product.ToList();
             cbConfigurator.ItemsSource = DBConnection.connect.Configurator.ToList();
         }
         
@@ -90,7 +95,7 @@ namespace FurnitureSoftwareUI.Pages.Provider
                 }
 
             }
-            catch (NullReferenceException)
+            catch (FormatException)
             {
                 return;
             }

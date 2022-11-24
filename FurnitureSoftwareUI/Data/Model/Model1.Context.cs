@@ -27,7 +27,6 @@ namespace FurnitureSoftwareUI.Data.Model
     
         public virtual DbSet<Authorization> Authorization { get; set; }
         public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientBasket> ClientBasket { get; set; }
         public virtual DbSet<Configurator> Configurator { get; set; }
         public virtual DbSet<Discount> Discount { get; set; }
         public virtual DbSet<DiscountClient> DiscountClient { get; set; }

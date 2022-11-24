@@ -17,7 +17,7 @@ namespace FurnitureSoftwareUI.Data.Classes
         }
         public static IEnumerable<Product> GetProductsPrice(int price)
         {
-            return DBMethodsFromProducts.GetProducts().Where(p=>p.Configurator.Price == price).ToList();
+            return DBMethodsFromProducts.GetProducts().Where(p=> Convert.ToInt32(p.Configurator.Price) == price).ToList();
         }
         public static IEnumerable<Product> GetProductsType(int idType)
         {
@@ -33,15 +33,15 @@ namespace FurnitureSoftwareUI.Data.Classes
         }
         public static IEnumerable<Product> GetProductsPriceOrType(int idType, int price)
         {
-            return DBMethodsFromProducts.GetProducts().Where(p=>p.Configurator.Price == price && p.ProductType.id == idType).ToList();
+            return DBMethodsFromProducts.GetProducts().Where(p=> Convert.ToInt32(p.Configurator.Price) == price && p.ProductType.id == idType).ToList();
         }
         public static IEnumerable<Product> GetProductsPriceOrConfigurate(int idConfigurator, int price)
         {
-            return DBMethodsFromProducts.GetProducts().Where(p => p.Configurator.Price == price && p.Configurator.id == idConfigurator).ToList();
+            return DBMethodsFromProducts.GetProducts().Where(p => Convert.ToInt32(p.Configurator.Price) == price && p.Configurator.id == idConfigurator).ToList();
         }
         public static IEnumerable<Product> GetProductsAllSort(int idConfigurator, int price, int idType)
         {
-            return DBMethodsFromProducts.GetProducts().Where(p => p.Configurator.Price == price && p.Configurator.id == idConfigurator && p.ProductType.id == idType).ToList();
+            return DBMethodsFromProducts.GetProducts().Where(p => Convert.ToInt32(p.Configurator.Price) == price && p.Configurator.id == idConfigurator && p.ProductType.id == idType).ToList();
         }
     }
 }
